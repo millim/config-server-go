@@ -23,3 +23,4 @@ tmp
 
 ### other file
 *.db
+dist/*

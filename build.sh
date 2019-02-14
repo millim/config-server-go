@@ -8,7 +8,7 @@ fi
 if [ $1 == "mac" ]
 then
 {
-  CGO_ENABLED=0 GOOS=darwin GOARCH=amd64  go build --tags "libsqlite3 linux" -o dist/main-mac
+  go build -o dist/main-mac
   echo "------>   build ok"
 }||{
   echo "build error"
