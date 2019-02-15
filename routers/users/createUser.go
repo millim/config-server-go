@@ -8,7 +8,7 @@ import (
 
 type CreateUserFrom struct {
 	Name     string `form:"name" json:"name"`
-	Password string `json:"password"`
+	Password string `form:"password" json:"password"`
 }
 
 func createUser(c *gin.Context) {

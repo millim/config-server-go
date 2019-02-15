@@ -11,6 +11,7 @@ import (
 func MigrateDB() {
 	db := common.GetDB()
 	db.AutoMigrate(&User{})
+	db.AutoMigrate(&Config{})
 }
 
 func InitTestDB(dbFile string) *gorm.DB {

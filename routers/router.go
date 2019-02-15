@@ -11,7 +11,7 @@ func InitRoutes(route *gin.Engine) {
 
 	prefixUsersRoute := route.Group("/api")
 
-	configs.Router(prefixUsersRoute)
+	configs.Routes(prefixUsersRoute)
 	users.Routes(prefixUsersRoute)
 	files.Routes(prefixUsersRoute)
 
