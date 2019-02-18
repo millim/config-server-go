@@ -24,3 +24,4 @@ tmp
 ### other file
 *.db
 dist/*
+deploy/config.json
