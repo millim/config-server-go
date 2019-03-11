@@ -2,6 +2,7 @@ package models
 
 import (
 	"config-server-go/common"
+	"config-server-go/models/user"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
@@ -10,7 +11,7 @@ import (
 
 func MigrateDB() {
 	db := common.GetDB()
-	db.AutoMigrate(&User{})
+	db.AutoMigrate(&user.User{})
 	db.AutoMigrate(&Config{})
 }
 
