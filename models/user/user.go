@@ -17,7 +17,7 @@ type User struct {
 }
 
 //CreateUser Create user info, userName  String
-func (u *User) CreateUser(userName string, password string) {
+func (u *User) CreateUser(userName string, password string) error {
 	s := sha256.New()
 	s.Write([]byte(password))
 
@@ -31,6 +31,7 @@ func (u *User) CreateUser(userName string, password string) {
 	if result.Error != nil {
 		errors.New("user name is exists")
 	}
+	return nil
 }
 
 //LoginUser User login, need userName and password
