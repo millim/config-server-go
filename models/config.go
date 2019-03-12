@@ -2,6 +2,7 @@ package models
 
 import "github.com/jinzhu/gorm"
 
+//Config 数据配置文件
 type Config struct {
 	gorm.Model
 	Env      string `gorm:"default:'default'"`

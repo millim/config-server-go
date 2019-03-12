@@ -2,10 +2,12 @@ package users
 
 import (
 	"config-server-go/models"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
+//CreateUserFrom 创建用户的表单
 type CreateUserFrom struct {
 	Name     string `form:"name" json:"name"`
 	Password string `form:"password" json:"password"`

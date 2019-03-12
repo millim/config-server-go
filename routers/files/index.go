@@ -3,12 +3,14 @@ package files
 import (
 	"bytes"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/json-iterator/go"
 	"net/http"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	jsoniter "github.com/json-iterator/go"
 )
 
+//DownloadType 下载的类型
 type DownloadType struct {
 	InitStatus  bool
 	ContentType string
@@ -29,6 +31,7 @@ func headerText(filename string) string {
 	return `attachment; filename="` + filename + `"`
 }
 
+//Routes 路由初始化内容
 func Routes(route *gin.RouterGroup) {
 
 	route.GET("/files/:name/:config_file", func(c *gin.Context) {

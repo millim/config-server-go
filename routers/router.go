@@ -4,9 +4,11 @@ import (
 	"config-server-go/routers/configs"
 	"config-server-go/routers/files"
 	"config-server-go/routers/users"
+
 	"github.com/gin-gonic/gin"
 )
 
+//InitRoutes 初始化路由
 func InitRoutes(route *gin.Engine) {
 
 	prefixUsersRoute := route.Group("/api")

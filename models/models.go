@@ -4,17 +4,20 @@ import (
 	"config-server-go/common"
 	"config-server-go/models/user"
 	"fmt"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"os"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/sqlite" //初始化数据库
 )
 
+//MigrateDB 数据库结构初始化
 func MigrateDB() {
 	db := common.GetDB()
 	db.AutoMigrate(&user.User{})
 	db.AutoMigrate(&Config{})
 }
 
+//InitTestDB 测试的数据库初始化
 func InitTestDB(dbFile string) *gorm.DB {
 	if dbFile == "" {
 		dbFile = "../server_test.db"
