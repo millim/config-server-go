@@ -2,6 +2,7 @@ package configs
 
 import (
 	"config-server-go/common/db"
+	"config-server-go/models/migrate"
 	"os"
 	"testing"
 
@@ -20,7 +21,7 @@ func TestMain(m *testing.M) {
 	Routes(prefixGroup)
 
 	testDB = db.InitTestDB("../../server_test.db")
-
+	migrate.Run()
 	run := m.Run()
 	testDB.Close()
 	os.Exit(run)
