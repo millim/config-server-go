@@ -1,32 +1,33 @@
 package main_test
 
 import (
-	"config-server-go/common"
+	"config-server-go/common/db"
 	"fmt"
+	"os"
+	"testing"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"os"
-	"testing"
 )
 
 func TestMain(m *testing.M) {
 	dbName := "server_test.db"
-	db, error := gorm.Open("sqlite3", "./"+dbName)
+	linkDB, error := gorm.Open("sqlite3", "./"+dbName)
 	if error != nil {
 		fmt.Println("database error:")
 		fmt.Println(error)
 	}
-	common.SetDB(db)
+	db.SetDB(linkDB)
 	gin.SetMode(gin.TestMode)
 	run := m.Run()
-	db.Close()
+	linkDB.Close()
 	os.Exit(run)
 }
 
 func TestRun(t *testing.T) {
-	db := common.GetDB()
-	if db == nil {
+	linkDB := db.GetDB()
+	if linkDB == nil {
 		t.Fatal("database is init error")
 	}
 }

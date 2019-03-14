@@ -1,7 +1,7 @@
 package users
 
 import (
-	"config-server-go/models"
+	"config-server-go/models/user"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -16,7 +16,7 @@ type CreateUserFrom struct {
 func createUser(c *gin.Context) {
 	var data CreateUserFrom
 	c.ShouldBindJSON(&data)
-	user := new(models.User)
+	user := new(user.User)
 	err := user.CreateUser(data.Name, data.Password)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"error": err.Error()})

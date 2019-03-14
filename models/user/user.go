@@ -1,10 +1,9 @@
 package user
 
 import (
-	"config-server-go/common"
+	"config-server-go/common/db"
 	"crypto/sha256"
 	"errors"
-	"fmt"
 
 	"github.com/jinzhu/gorm"
 )
@@ -24,12 +23,12 @@ func (u *User) CreateUser(userName string, password string) error {
 	u.Name = userName
 	u.Password = string(s.Sum([]byte(nil)))
 
-	db := common.GetDB()
-	fmt.Println("create db ===>", db)
-	result := db.Create(&u)
+	linkDB := db.GetDB()
+
+	result := linkDB.Create(&u)
 
 	if result.Error != nil {
-		errors.New("user name is exists")
+		return errors.New("user name is exists")
 	}
 	return nil
 }

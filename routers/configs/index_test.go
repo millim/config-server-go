@@ -1,11 +1,12 @@
 package configs
 
 import (
-	"config-server-go/models"
-	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
+	"config-server-go/common/db"
 	"os"
 	"testing"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
 )
 
 var testRoute *gin.Engine
@@ -18,7 +19,7 @@ func TestMain(m *testing.M) {
 	prefixGroup := testRoute.Group("/api")
 	Routes(prefixGroup)
 
-	testDB = models.InitTestDB("../../server_test.db")
+	testDB = db.InitTestDB("../../server_test.db")
 
 	run := m.Run()
 	testDB.Close()

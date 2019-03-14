@@ -1,16 +1,17 @@
 package main
 
 import (
-	"config-server-go/common"
-	"config-server-go/models"
+	"config-server-go/common/db"
+	"config-server-go/models/migrate"
 	"config-server-go/routers"
 	"fmt"
+	"net/http"
+	"os"
+
 	"github.com/facebookgo/grace/gracehttp"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"net/http"
-	"os"
 )
 
 func main() {
@@ -20,15 +21,15 @@ func main() {
 	if env == "release" {
 		dbName = "server_pro.db"
 	}
-	db, error := gorm.Open("sqlite3", "./"+dbName)
+	linkDB, error := gorm.Open("sqlite3", "./"+dbName)
 	if error != nil {
 		fmt.Println("database error:")
 		fmt.Println(error)
 	}
-	common.SetDB(db)
-	defer db.Close()
+	db.SetDB(linkDB)
+	defer linkDB.Close()
 
-	models.MigrateDB()
+	migrate.Run()
 
 	server := gin.Default()
 	server.GET("/ping", func(c *gin.Context) {
