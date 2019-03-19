@@ -11,6 +11,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 
+	_ "config-server-go/extend/log"
+
 	"github.com/facebookgo/grace/gracehttp"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -18,10 +20,6 @@ import (
 )
 
 var fp = common.FlagParams
-
-func init() {
-	setLog()
-}
 
 func main() {
 	dbName := "server_dev.db"
@@ -63,23 +61,4 @@ func main() {
 
 	gracehttp.Serve(srv)
 	defer logrus.Info("server is close！")
-}
-
-func setLog() {
-	level, _ := logrus.ParseLevel(fp.LogLevel)
-	logrus.SetFormatter(&logrus.TextFormatter{
-		ForceColors:   true,
-		FullTimestamp: true,
-	})
-
-	logrus.SetLevel(level)
-	if fp.LogFile != "" {
-		file, err := os.OpenFile(fp.LogFile, os.O_CREATE|os.O_WRONLY, 0666)
-		if err == nil {
-			logrus.SetOutput(file)
-		} else {
-			logrus.Info("Failed to log to file, using default stderr")
-		}
-	}
-
 }

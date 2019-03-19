@@ -17,7 +17,8 @@ import (
 //DeployConfig config file fields
 // fields have HostName and PrivateKey
 type DeployConfig struct {
-	HostName   string `json:"hostName"`
+	SSHHost    string `json:"sshHost"`
+	SSHPort    string `json:"sshPort"`
 	PrivateKey string `json:"privateKey"`
 }
 
@@ -57,7 +58,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("read config file is error : %v", err)
 	}
-	hostKey, err := getHostKey(configData.HostName)
+	hostKey, err := getHostKey(fmt.Sprintf("[%s]:%s", configData.SSHHost, configData.SSHPort))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -76,7 +77,7 @@ func main() {
 		},
 		HostKeyCallback: ssh.FixedHostKey(hostKey),
 	}
-	client, err := ssh.Dial("tcp", "199.115.231.4:27572", config)
+	client, err := ssh.Dial("tcp", fmt.Sprintf("%s:%s", configData.SSHHost, configData.SSHPort), config)
 	if err != nil {
 		log.Fatalf("unable to connect: %v", err)
 	}

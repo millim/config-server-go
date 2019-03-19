@@ -1,4 +1,5 @@
 {
-  "hostName": "",
+  "sshHost": "",
+  "sshPort": "",
   "privateKey": ""
 }
