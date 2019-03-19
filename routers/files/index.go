@@ -2,12 +2,13 @@ package files
 
 import (
 	"bytes"
-	"fmt"
+	"encoding/json"
 	"net/http"
 	"strings"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/gin-gonic/gin"
-	jsoniter "github.com/json-iterator/go"
 )
 
 //DownloadType 下载的类型
@@ -47,10 +48,9 @@ func Routes(route *gin.RouterGroup) {
 			"momo":  "oh not",
 			"cc":    []int{1, 2, 3},
 		}
-		json := jsoniter.ConfigCompatibleWithStandardLibrary
 		b, err := json.MarshalIndent(m, "", "  ")
 		if err != nil {
-			fmt.Println("format error ------>", err)
+			logrus.Error("format error ------>", err)
 		}
 
 		contentType := downloadType.ContentType
