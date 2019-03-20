@@ -22,7 +22,7 @@ func buildParams() Params {
 	flag.StringVar(&m.LogFile, "logFile", "", "set print log file, default os.Stdout")
 	flag.StringVar(&m.Host, "host", "0.0.0.0", "server host")
 	flag.StringVar(&m.Port, "port", "3000", "server port")
-	flag.BoolVar(&m.LogShowLineNumber, "logShowLineNumber", true, "show log file and print file line")
+	flag.BoolVar(&m.LogShowLineNumber, "logShowLineNumber", false, "show log file and print file line")
 	flag.Parse()
 	return m
 }

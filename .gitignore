@@ -25,3 +25,5 @@ tmp
 *.db
 dist/*
 deploy/config.json
+.realize.yaml
+.vscode
