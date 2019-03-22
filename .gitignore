@@ -27,3 +27,4 @@ dist/*
 deploy/config.json
 .realize.yaml
 .vscode
+demo/*
